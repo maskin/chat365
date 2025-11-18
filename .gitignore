@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Database
+*.db
+*.sqlite3
+chat365.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Google Cloud credentials
+*.json
+!package.json
+!package-lock.json
+credentials/
+service-account-key.json
+
+# Audio files
+*.mp3
+*.wav
+*.ogg
+temp_audio/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Node modules (if any)
+node_modules/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音声放送システム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>音声放送システム</h1>
+        <div class="controls">
+            <button id="emergencyBtn">!! 緊急放送</button>
+            <button id="addBroadcastBtn">＋ 新規放送</button>
+        </div>
+    </header>
+
+    <main>
+        <h2>放送スケジュール</h2>
+        <div id="broadcastList">
+            <!-- スケジュールがここに動的に挿入される -->
+        </div>
+    </main>
+
+    <!-- 新規登録モーダル -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>新規放送の登録</h3>
+            <form id="addForm">
+                <label for="content">放送内容:</label>
+                <textarea id="content" name="content" rows="4" required></textarea>
+                <button type="button" id="recordBtn">音声入力</button>
+
+                <label for="scheduled_at">放送日時:</label>
+                <input type="datetime-local" id="scheduled_at" name="scheduled_at" required>
+
+                <label for="priority">優先度:</label>
+                <select id="priority" name="priority">
+                    <option value="0">通常</option>
+                    <option value="1">重要</option>
+                </select>
+
+                <button type="submit">登録する</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
