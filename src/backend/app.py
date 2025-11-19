@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Broadcast
 from datetime import datetime
 import hashlib
+from scheduler import init_scheduler
 
 # --- Flask App Initialization ---
 app = Flask(__name__, static_folder='../../frontend')
@@ -74,5 +75,10 @@ def serve_static(path):
 
 # --- Main Execution ---
 if __name__ == '__main__':
+    # Initialize Scheduler
+    init_scheduler(app)
+    
     # Note: `debug=True` is for development only.
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    # Warning: With debug=True, the reloader will start two schedulers.
+    # For production or testing scheduler, use use_reloader=False or handle the lock.
+    app.run(host='0.0.0.0', port=5001, debug=True, use_reloader=False)

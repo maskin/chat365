@@ -16,7 +16,7 @@ Base = declarative_base()
 class Broadcast(Base):
     __tablename__ = "broadcasts"
 
-    id = Column(BigInteger, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     uuid = Column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
     content = Column(Text, nullable=False)
     content_hash = Column(String(256), index=True)
