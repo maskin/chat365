@@ -8,7 +8,7 @@ from google.cloud import speech
 
 # 環境変数からAPIキーのパスを取得
 CREDENTIALS_PATH = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-AUDIO_FILE = "tests/test_audio_ja.wav"  # テスト用音声ファイル（要準備）
+AUDIO_FILE = "tests/output_ja.mp3"  # テスト用音声ファイル（要準備）
 
 
 def check_credentials():
@@ -38,6 +38,34 @@ def transcribe_audio(audio_file_path):
         print(f"4. 保存先: {audio_file_path}")
         return None
     
+    # 音声ファイルのプロパティチェック (WAVのみ)
+    import wave
+    if audio_file_path.lower().endswith('.wav'):
+        try:
+            with wave.open(audio_file_path, "rb") as wf:
+                channels = wf.getnchannels()
+                framerate = wf.getframerate()
+                duration = wf.getnframes() / framerate
+                
+                print(f"\n📊 音声ファイル情報:")
+                print(f"  - 長さ: {duration:.2f}秒")
+                print(f"  - サンプルレート: {framerate}Hz")
+                print(f"  - チャンネル数: {channels}")
+                
+                if duration < 1.0:
+                    print("\n⚠️  注意: 音声ファイルが短すぎます（1秒未満）。")
+                    print("    認識に失敗する可能性が高いです。3秒以上の音声を推奨します。")
+                
+                if framerate != 16000:
+                    print(f"\n⚠️  注意: サンプルレートが {framerate}Hz です（推奨: 16000Hz）。")
+                    print("    設定と一致しない場合、認識に失敗することがあります。")
+
+        except Exception as e:
+            print(f"⚠️ 音声ファイルの解析に失敗: {e}")
+    else:
+        print(f"\nℹ️  WAV形式ではないため、詳細解析をスキップします: {audio_file_path}")
+
+    
     try:
         client = speech.SpeechClient()
         
@@ -45,12 +73,23 @@ def transcribe_audio(audio_file_path):
             content = audio_file.read()
         
         audio = speech.RecognitionAudio(content=content)
-        config = speech.RecognitionConfig(
-            encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
-            sample_rate_hertz=16000,
-            language_code="ja-JP",
-            enable_automatic_punctuation=True,
-        )
+        
+        # ファイル形式に応じて設定を変更
+        if audio_file_path.lower().endswith('.mp3'):
+            config = speech.RecognitionConfig(
+                encoding=speech.RecognitionConfig.AudioEncoding.MP3,
+                sample_rate_hertz=24000, # TTSのデフォルト出力に合わせて調整（必要に応じて変更）
+                language_code="ja-JP",
+                enable_automatic_punctuation=True,
+            )
+        else:
+            # WAV (LINEAR16) のデフォルト設定
+            config = speech.RecognitionConfig(
+                encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
+                sample_rate_hertz=16000,
+                language_code="ja-JP",
+                enable_automatic_punctuation=True,
+            )
         
         print(f"\n🎤 音声ファイル '{audio_file_path}' の文字起こしを開始...")
         response = client.recognize(config=config, audio=audio)

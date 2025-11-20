@@ -20,7 +20,7 @@ build/
 # Database
 *.db
 *.sqlite3
-chat365.db
+*.sqlite3
 
 # Environment variables
 .env

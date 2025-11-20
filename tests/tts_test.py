@@ -66,6 +66,29 @@ def synthesize_text(text, output_filename):
         return False
 
 
+
+
+def play_audio(filename):
+    """音声ファイルを再生する (macOS/Linux)"""
+    import subprocess
+    import platform
+    
+    system = platform.system()
+    
+    try:
+        if system == "Darwin":  # macOS
+            print(f"▶️ 再生中: {filename}")
+            subprocess.run(["afplay", filename], check=True)
+        elif system == "Linux":
+            # Linux (aplay or mpg123) - 簡易的な実装
+            subprocess.run(["aplay", filename], check=False)
+        else:
+            print("⚠️ このOSでの自動再生はサポートされていません")
+            
+    except Exception as e:
+        print(f"⚠️ 再生中にエラーが発生しました: {e}")
+
+
 def test_multiple_voices():
     """複数の音声タイプをテスト"""
     print("\n" + "=" * 60)
@@ -135,6 +158,9 @@ def main():
     success = synthesize_text(TEXT_TO_SYNTHESIZE, OUTPUT_FILE)
     
     if success:
+        # 音声を再生
+        play_audio(OUTPUT_FILE)
+
         # 複数音声タイプのテスト
         test_multiple_voices()
         

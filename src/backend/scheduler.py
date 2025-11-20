@@ -2,6 +2,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from database import SessionLocal, Broadcast
 from datetime import datetime
 import logging
+import os
+from services.tts_service import generate_audio, play_audio
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -52,8 +54,21 @@ def execute_broadcast(broadcast_id):
         broadcast.status = 'BROADCASTING'
         db.commit()
         
-        # TODO: Implement actual TTS and playback logic here
-        # For now, we simulate the broadcast
+        # Generate audio file path
+        # Use a temporary directory or a dedicated audio directory
+        audio_dir = os.path.join(os.path.dirname(__file__), '../../temp_audio')
+        os.makedirs(audio_dir, exist_ok=True)
+        audio_file = os.path.join(audio_dir, f"{broadcast.uuid}.mp3")
+        
+        # 1. Generate Audio
+        if generate_audio(broadcast.content, audio_file):
+            # 2. Play Audio
+            if not play_audio(audio_file):
+                logger.error(f"Failed to play audio for broadcast {broadcast.id}")
+                # Note: We might want to mark as FAILED or PARTIAL here, but for now we proceed
+        else:
+            logger.error(f"Failed to generate audio for broadcast {broadcast.id}")
+            raise Exception("TTS generation failed")
         
         # Update status to COMPLETED
         broadcast.status = 'COMPLETED'
