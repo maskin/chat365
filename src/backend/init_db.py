@@ -9,7 +9,7 @@ def main():
     # `database.py`で定義されたすべてのテーブルを作成
     Base.metadata.create_all(bind=engine)
     
-    print("データベースの初期化が完了しました。`chat365.db`ファイルが作成されました。")
+    print("データベースの初期化が完了しました。`pai.db`ファイルが作成されました。")
 
 if __name__ == "__main__":
     main()

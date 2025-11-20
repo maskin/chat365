@@ -16,7 +16,7 @@
 
 1. [Google Cloud Console](https://console.cloud.google.com/)にアクセス
 2. 右上の「プロジェクトを選択」→「新しいプロジェクト」をクリック
-3. プロジェクト名を入力（例: `chat365-broadcast`）
+3. プロジェクト名を入力（例: `pai-broadcast`）
 4. 「作成」をクリック
 
 ### 2.2 APIの有効化
@@ -36,7 +36,7 @@
 
 1. 左側メニューから「IAMと管理」→「サービスアカウント」を選択
 2. 「サービスアカウントを作成」をクリック
-3. サービスアカウント名を入力（例: `chat365-service-account`）
+3. サービスアカウント名を入力（例: `pai-service-account`）
 4. 「作成して続行」をクリック
 5. ロールを選択:
    - 「Cloud Speech 管理者」
@@ -50,7 +50,7 @@
 3. 「鍵を追加」→「新しい鍵を作成」をクリック
 4. キーのタイプ: JSON
 5. 「作成」をクリック
-6. JSONファイルが自動ダウンロードされる（例: `chat365-service-account-key.json`）
+6. JSONファイルが自動ダウンロードされる（例: `pai-service-account-key.json`）
 
 ⚠️ **重要**: このJSONファイルは機密情報です。Gitリポジトリにコミットしないでください！
 
@@ -63,7 +63,7 @@
 mkdir -p credentials
 
 # ダウンロードしたJSONファイルを移動
-mv ~/Downloads/chat365-service-account-key.json credentials/
+mv ~/Downloads/pai-service-account-key.json credentials/
 ```
 
 ---
@@ -73,8 +73,8 @@ mv ~/Downloads/chat365-service-account-key.json credentials/
 ### 3.1 リポジトリのクローン
 
 ```bash
-git clone https://github.com/maskin/chat365.git
-cd chat365
+git clone https://github.com/maskin/pai.git
+cd pai
 ```
 
 ### 3.2 Python仮想環境の作成
@@ -114,7 +114,7 @@ pip install -r src/backend/requirements.txt
 `~/.bashrc` または `~/.zshrc` に追加:
 
 ```bash
-export GOOGLE_APPLICATION_CREDENTIALS="/path/to/chat365/credentials/chat365-service-account-key.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/pai/credentials/pai-service-account-key.json"
 ```
 
 設定を反映:
@@ -128,7 +128,7 @@ source ~/.bashrc  # または source ~/.zshrc
 PowerShellの場合:
 
 ```powershell
-$env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\chat365\credentials\chat365-service-account-key.json"
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\pai\credentials\pai-service-account-key.json"
 ```
 
 永続的に設定する場合は「システムのプロパティ」→「環境変数」から設定してください。
@@ -164,7 +164,7 @@ python tests/speech_test.py
 ============================================================
 Google Cloud Speech-to-Text API 技術検証
 ============================================================
-✅ 認証情報: /path/to/credentials/chat365-service-account-key.json
+✅ 認証情報: /path/to/credentials/pai-service-account-key.json
 
 🎤 音声ファイル 'tests/test_audio_ja.wav' の文字起こしを開始...
 
@@ -190,7 +190,7 @@ python tests/tts_test.py
 ============================================================
 Google Cloud Text-to-Speech API 技術検証
 ============================================================
-✅ 認証情報: /path/to/credentials/chat365-service-account-key.json
+✅ 認証情報: /path/to/credentials/pai-service-account-key.json
 
 🔊 テキストを音声に変換中...
 テキスト: こんにちは。これは、Google Cloud Text-to-Speech API...

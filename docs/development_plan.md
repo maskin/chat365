@@ -376,7 +376,7 @@
 
 **成果物**
 - `deploy.sh`
-- `chat365.service`（systemd設定）
+- `pai.service`（systemd設定）
 - デプロイ手順書
 
 ---
@@ -623,7 +623,7 @@
 - [Google Cloud Speech-to-Text ドキュメント](https://cloud.google.com/speech-to-text/docs)
 - [Google Cloud Text-to-Speech ドキュメント](https://cloud.google.com/text-to-speech/docs)
 - [APScheduler ドキュメント](https://apscheduler.readthedocs.io/)
-- [Flask ドキュメント](https://flask.palletsprojects.com/)
+- [maskin/pai](https://github.com/maskin/pai)
 
 ---
 

@@ -23,7 +23,7 @@
     - `GET /api/broadcasts`: 放送スケジュールの一覧を取得します。
     - `POST /api/broadcasts`: 新しい放送スケジュールを登録します。
 - **データベース:**
-    - SQLite (`chat365.db`) を使用しています。
+    - SQLite (`pai.db`) を使用しています。
     - `database.py` に `SQLAlchemy` を用いたモデル定義があります。
 - **実行方法:**
     ```bash

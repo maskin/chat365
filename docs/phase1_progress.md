@@ -17,7 +17,7 @@
    - セットアップガイドの作成
 
 2. ✅ **リポジトリ初期化**
-   - GitHubリポジトリ作成: `maskin/chat365`
+   - GitHubリポジトリ作成: `maskin/pai`
    - .gitignoreの設定
    - 初回コミット＆プッシュ
 
@@ -95,7 +95,7 @@ SQLAlchemy               # ORM
 
 ### GitHubリポジトリ
 
-- **URL**: https://github.com/maskin/chat365
+- **URL**: https://github.com/maskin/pai
 - **ブランチ**: main
 - **最新コミット**: `718dcba` - "Phase 1準備: 技術検証スクリプトとセットアップガイドを追加"
 - **リモート**: origin (HTTPS)
@@ -118,7 +118,7 @@ Google Cloud APIとスケジューラーの動作を検証し、技術的リス�
    ```
    - Google Cloud Consoleにアクセス: https://console.cloud.google.com/
    - 新しいプロジェクトを作成
-   - プロジェクト名: chat365-broadcast（推奨）
+   - プロジェクト名: pai-broadcast（推奨）
    ```
 
 2. **APIの有効化**
@@ -131,7 +131,7 @@ Google Cloud APIとスケジューラーの動作を検証し、技術的リス�
 3. **サービスアカウント作成**
    ```
    IAMと管理 → サービスアカウント → 作成
-   - 名前: chat365-service-account
+   - 名前: pai-service-account
    - ロール:
      ├─ Cloud Speech 管理者
      └─ Cloud Text-to-Speech 管理者
@@ -141,20 +141,20 @@ Google Cloud APIとスケジューラーの動作を検証し、技術的リス�
    ```
    サービスアカウント → キー → 新しい鍵を作成
    - タイプ: JSON
-   - ダウンロードされたファイル名例: chat365-xxxx.json
+   - ダウンロードされたファイル名例: pai-xxxx.json
    ```
 
 5. **認証情報の配置**
    ```bash
-   cd /Users/maskin/Library/CloudStorage/Dropbox/0.github/chat365
+   cd /Users/maskin/Library/CloudStorage/Dropbox/0.github/pai
    mkdir -p credentials
-   mv ~/Downloads/chat365-xxxx.json credentials/
+   mv ~/Downloads/pai-xxxx.json credentials/
    ```
 
 6. **環境変数の設定**
    ```bash
    # ~/.zshrc または ~/.bashrc に追加
-   export GOOGLE_APPLICATION_CREDENTIALS="/Users/maskin/Library/CloudStorage/Dropbox/0.github/chat365/credentials/chat365-xxxx.json"
+   export GOOGLE_APPLICATION_CREDENTIALS="/Users/maskin/Library/CloudStorage/Dropbox/0.github/pai/credentials/pai-xxxx.json"
    
    # 設定を反映
    source ~/.zshrc
@@ -187,7 +187,7 @@ Google Cloud APIとスケジューラーの動作を検証し、技術的リス�
 **実行**:
 
 ```bash
-cd /Users/maskin/Library/CloudStorage/Dropbox/0.github/chat365
+cd /Users/maskin/Library/CloudStorage/Dropbox/0.github/pai
 source venv/bin/activate
 python tests/speech_test.py
 ```
@@ -428,7 +428,7 @@ pip install google-cloud-speech google-cloud-texttospeech
 
 ### GitHubリポジトリ
 
-- [maskin/chat365](https://github.com/maskin/chat365)
+- [maskin/pai](https://github.com/maskin/pai)
 
 ---
 
@@ -463,7 +463,7 @@ pip install google-cloud-speech google-cloud-texttospeech
 4. Gitリポジトリの初期化
    - .gitignore作成（Python、DB、認証情報を除外）
    - 初回コミット
-   - GitHubリポジトリ作成（maskin/chat365）
+   - GitHubリポジトリ作成（maskin/pai）
    - リモートプッシュ（HTTPS経由）
 
 5. 開発環境のセットアップ
@@ -515,7 +515,7 @@ pip install google-cloud-speech google-cloud-texttospeech
 
 - [ ] Gitリポジトリが最新状態か確認
   ```bash
-  cd /Users/maskin/Library/CloudStorage/Dropbox/0.github/chat365
+  cd /Users/maskin/Library/CloudStorage/Dropbox/0.github/pai
   git pull
   ```
 

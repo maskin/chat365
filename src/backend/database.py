@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 import uuid
 
 # データベースファイルのパス
-DATABASE_URL = "sqlite:///chat365.db"
+DATABASE_URL = "sqlite:///pai.db"
 
 # SQLAlchemyの基本設定
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
